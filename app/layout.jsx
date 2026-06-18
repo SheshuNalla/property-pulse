@@ -5,7 +5,7 @@ export const metadata = {
     keywords: "rentals, find properties, find rentals"
 }
 
-function MainLayout({children}) {
+const MainLayout = ({children}) => {
   return (
     <html>
         <body>
