@@ -9,7 +9,7 @@ const NotFound = () => {
         >
           <div className="flex justify-center">
             <FaExclamationTriangle
-              className="fas fa-exclamation-triangle fa-5x text-8xl text-yellow-400"
+              className="fas fa-exclamation-triangle fa-5x text-8xl text-yellow-500"
             ></FaExclamationTriangle>
           </div>
           <div className="text-center">
