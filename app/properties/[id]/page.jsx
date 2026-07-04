@@ -6,6 +6,7 @@ import PropertyHeaderimage from "@/components/PropertyHeaderimage";
 import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
 import PropertyDetails from "@/components/PropertyDetails";
+import Spinner from "@/components/Spinner";
 const PropertyPage =  () => {
 
   const { id } = useParams();
@@ -37,6 +38,7 @@ const PropertyPage =  () => {
   )
   return (
     <>
+    {loading && <Spinner loading={loading}/>}
     {!loading && property && (
       <>
         <PropertyHeaderimage image = {property.images[0]}/>
