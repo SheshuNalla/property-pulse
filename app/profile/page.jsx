@@ -39,7 +39,7 @@ const ProfilePage = () => {
     },[session])
 
     const handleDeleteProperty = async (propertyId) =>{
-      console.log(propertyId)
+
       const confirmed = window.confirm('Are you sure you want to delete this property?');
 
       if(!confirmed) return;
