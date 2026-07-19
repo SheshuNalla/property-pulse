@@ -2,6 +2,7 @@ import connectDB from "@/config/database";
 import Property from "@/models/Property";
 import { getSessionUser } from '@/utils/getSessionUser';
 import cloudinary from "@/config/cloudinary";
+import { geocodeAddress } from "@/utils/geocode";
 
 // GET api/properties
 export const GET = async (request) => {
@@ -26,6 +27,16 @@ export const POST = async (request) => {
         const {userId} = sessionUser;
 
         const formData = await request.formData();
+        const street= formData.get('location.street');
+        const city= formData.get('location.city');
+        const state= formData.get('location.state');
+        const zipcode= formData.get('location.zipcode');
+
+        const fullAddress = `${street}, ${city},${state}, ${zipcode}`;
+
+        const coordinates = await geocodeAddress(fullAddress);
+        console.log(coordinates);
+
         const amenities = formData.getAll('amenities');
         const images = formData.getAll('images').filter((image) => image.name !== '');
 
@@ -35,10 +46,11 @@ export const POST = async (request) => {
             name: formData.get('name'),
             description: formData.get('description'),
             location: {
-                street: formData.get('location.street'),
-                city: formData.get('location.city'),
-                state: formData.get('location.state'),
-                zipcode: formData.get('location.zipcode')
+                street,
+                city,
+                state,
+                zipcode,
+                coordinates,
             },
             beds: formData.get('beds'),
             baths: formData.get('baths'),
