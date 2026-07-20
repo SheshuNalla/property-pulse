@@ -17,10 +17,10 @@ const PropertyMap = ({ property }) => {
     height: '500px',
   });
   const [loading, setLoading] = useState(true);
-
+  const [error, setError] = useState('');
   useEffect(() => {
     const fetchCoords = async () => {
-      
+      try {
         const address = `${property.location.street},${property.location.city},${property.location.state},${property.location.zipcode}`;
         const res = await fetch(`https://api.maptiler.com/geocoding/${encodeURIComponent(
           address
@@ -28,12 +28,21 @@ const PropertyMap = ({ property }) => {
       );
 
       const data = await res.json();
-      
+      console.log(data.features[0]);
       if(!data.features || data.features.length === 0){
-        console.log("No results Found", data);
+        setError("Location not Found");
+        setLoading(false);
         return;
       }
-      const [lng, lat] = data.features[0].center;
+      const feature = data.features[0];
+      // Reject poor matches
+      if (feature.relevance < 0.65) {
+        setError("Location not found");
+        setLoading(false);
+        return;
+      }
+
+      const [lng, lat] = feature.center;
       setLat(lat);
       setLng(lng);
       
@@ -46,13 +55,23 @@ const PropertyMap = ({ property }) => {
       });
 
       setLoading(false);
-      
+      } catch (error) {
+        console.error(error);
+        setError("Location not found");
+        setLoading(false);
+      }
     };
     fetchCoords();
   },[property]);
 
   if(loading) return <Spinner loading={loading}/>
-
+  if(error) {
+    return (
+      <div className="h-[500px] flex items-center justify-center border rounded-lg">
+        <p className="text-red-500 font-semibold">{error}</p>
+      </div>
+    );
+  }
   return !loading &&(
     <Map
       initialViewState={viewport}
