@@ -28,7 +28,6 @@ const PropertyMap = ({ property }) => {
       );
 
       const data = await res.json();
-      console.log(data.features[0]);
       if(!data.features || data.features.length === 0){
         setError("Location not Found");
         setLoading(false);

@@ -1,6 +1,5 @@
 import connectDB from "@/config/database";
 import User from "@/models/User";
-import Property from "@/models/Property";
 import { getSessionUser } from "@/utils/getSessionUser";
 
 export const dynamic = 'force-dynamic';
@@ -29,23 +28,7 @@ export const POST = async (request) => {
             (bookmark) => bookmark?.toString() === propertyId
         );
 
-        let message;
-
-        if(isBookmarked){
-            // If already bookmarked remove it
-            user.bookmarks.pull(propertyId);
-            message = "Bookmark Removed successfully"
-            isBookmarked = false;
-        }else{
-            // If not add to bookmark
-            user.bookmarks.push(propertyId);
-            message = "Bookmarks added successfully";
-            isBookmarked = true;
-        }
-
-        await user.save();
-
-        return new Response(JSON.stringify({message, isBookmarked}), {status: 200})
+        return new Response(JSON.stringify({isBookmarked}), {status: 200})
         
     } catch (error) {
         console.log(error)

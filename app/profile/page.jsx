@@ -12,6 +12,8 @@ const ProfilePage = () => {
     const profileImage = session?.user?.image;
     const profileName = session?.user?.name;
     const profileEmail = session?.user?.email;
+    const bookmarks = session?.user?.bookmarks;
+    console.log(bookmarks);
 
     const [properties, setProperties] = useState([]);
     const [loading, setLoading] = useState(true);
