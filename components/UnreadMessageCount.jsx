@@ -1,8 +1,9 @@
 'use client';
 import { useState, useEffect } from "react";
+import { useGlobalContext } from "@/context/GlobalContext";
 
 const UnreadMessageCount = ({session}) => {
-  const [unreadCount, setUnreadCount] = useState(0);
+  const {unreadCount, setUnreadCount} = useGlobalContext();
 
   useEffect(() => {
     if(!session){
@@ -14,7 +15,6 @@ const UnreadMessageCount = ({session}) => {
 
       if(res.status === 200){
         const data = await res.json();
-        console.log(data);
         setUnreadCount(data);
       }
       } catch (error) {
