@@ -24,7 +24,7 @@ export const GET = async (request) => {
     } catch (error) {
         return new Response('Something went wrong', {status: 500})   
     }
-}
+};
 
 export const POST = async (request) => {
     try {
