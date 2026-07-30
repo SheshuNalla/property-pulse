@@ -4,6 +4,8 @@ import { ToastContainer } from 'react-toastify';
 import { GlobalProvider } from '@/context/GlobalContext';
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
+import 'react-toastify/dist/ReactToastify.css';
+import 'photoswipe/dist/photoswipe.css';
 
 
 export const metadata = {
