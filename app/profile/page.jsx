@@ -13,7 +13,6 @@ const ProfilePage = () => {
     const profileName = session?.user?.name;
     const profileEmail = session?.user?.email;
     const bookmarks = session?.user?.bookmarks;
-    console.log(bookmarks);
 
     const [properties, setProperties] = useState([]);
     const [loading, setLoading] = useState(true);

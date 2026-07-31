@@ -16,17 +16,17 @@ const FeaturedPropertyCard = ({property}) => {
     };
   return (
     <div
-        className="bg-white rounded-xl shadow-md relative flex flex-col md:flex-row"
+        className="bg-white rounded-xl shadow-md relative flex flex-col md:flex-row md:justify-between"
     >
         <Image
             src={property.images[0]}
             alt=""
-            width={0}
+            width={1/2}
             height={0}
-            sizes='100vw'
+            sizes='100vh'
             className="object-cover rounded-t-xl md:rounded-tr-none md:rounded-l-xl w-full md:w-2/5"
         />
-        <div className="p-6">
+        <div className="p-6 w-1/2">
             <h3 className="text-xl font-bold">{property.name}</h3>
             <div className="text-gray-600 mb-4">{property.type}</div>
             <h3
