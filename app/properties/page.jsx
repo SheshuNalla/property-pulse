@@ -1,6 +1,8 @@
 import PropertySearchForm from '@/components/PropertySearchForm';
 import Properties from '@/components/Properties';
 
+export const dynamic = 'force-dynamic';
+
 const PropertyPage = async() => {
   return (
       <>
